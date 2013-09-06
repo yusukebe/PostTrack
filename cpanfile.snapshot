@@ -2264,6 +2264,19 @@ DISTRIBUTIONS
       Try::Tiny 0
       URI 1.59
       parent 0
+  Plack-Middleware-AxsLog-0.12
+    pathname: K/KA/KAZEBURO/Plack-Middleware-AxsLog-0.12.tar.gz
+    provides:
+      Plack::Middleware::AxsLog 0.12
+    requirements:
+      Apache::LogFormat::Compiler 0.12
+      CPAN::Meta 0
+      CPAN::Meta::Prereqs 0
+      ExtUtils::CBuilder 0
+      HTTP::Message 6.06
+      Module::Build 0.38
+      Plack 1.0023
+      perl v5.8.5
   Plack-Middleware-ReverseProxy-0.15
     pathname: M/MI/MIYAGAWA/Plack-Middleware-ReverseProxy-0.15.tar.gz
     provides:

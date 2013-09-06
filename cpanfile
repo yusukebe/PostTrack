@@ -1,6 +1,7 @@
 requires 'Mojolicious';
 requires 'Plack';
 requires 'Plack::Middleware::ReverseProxy';
+requires 'Plack::Middleware::AxsLog';
 requires 'Mouse';
 requires 'Facebook::Graph';
 requires 'JSON';
