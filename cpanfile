@@ -5,3 +5,4 @@ requires 'Mouse';
 requires 'Facebook::Graph';
 requires 'JSON';
 requires 'LWP::UserAgent';
+requires 'Starman';
