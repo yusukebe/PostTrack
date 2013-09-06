@@ -31,13 +31,18 @@ sub action {
     $self->redirect_to($uri);
 }
 
+sub redirect {
+    my $self = shift;
+    return $self->redirect_to('/');
+}
+
 sub callback {
     my $self = shift;
     my $code = $self->req->param('code');
     my $access_token = $self->fb()->request_access_token($code);
     $self->post($access_token->token, $self->session->{track_url});
     $self->session->{access_token} = undef;
-    $self->redirect_to(PostTrack->config->{facebook}{site_url});
+    return $self->redirect_to(PostTrack->config->{facebook}{site_url});
 }
 
 sub fb {

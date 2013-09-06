@@ -14,7 +14,7 @@ sub startup {
     $r->get('/login')->to('root#login');
     $r->get('/logout')->to('root#logout');
     $r->get('/callback')->to('root#callback');
-
+    $r->get('/.ybox.me/')->to('root#redirect');
 }
 
 1;
