@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html>
+  <head><title>PostTrack</title></head>
+  <body>
+    <h2><a href="/">What are you listening ?</a></h2>
+    <i>Post your favorite track to Facebook as listening.</i>
+    <hr />
+    <br />
+    <%= content %>
+  </body>
+</html>

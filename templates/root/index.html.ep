@@ -1,0 +1,14 @@
+% layout 'default';
+
+<form action="/search" method="get">
+  <p>
+    <label>Track Name</label>
+    <input name="track" type="text" />
+  </p>
+  <p>
+    <label>Artist *optional</label>
+    <input name="artist" type="text" />
+  </p>
+  <button>Search</button>
+</form>
+

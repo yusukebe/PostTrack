@@ -1,0 +1,12 @@
+% layout 'default';
+
+% use URI::Escape qw/uri_escape_utf8/;
+% for my $track (@$tracks) {
+<div class="track">
+% if ($track->{image}) {
+  <img src="<%= $track->{image}[2]{'#text'} %>" alt="<%= $track->{name} %>" width="50" height="50"/> 
+% }
+  <a href="/action?track_url=<%= uri_escape_utf8($track->{url}) %>"><%= $track->{name} %> by <%= $track->{artist} %></a>
+</div>
+<br />
+% }
