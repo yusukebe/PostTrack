@@ -12,8 +12,7 @@ my $psgi = Mojo::Server::PSGI->new( app => PostTrack::Web->new );
 my $app = $psgi->to_psgi_app;
 
 builder {
-    enable_if { $_[0]->{REMOTE_ADDR} eq '127.0.0.1' }
-        "Plack::Middleware::ReverseProxy";
+    enable 'Plack::Middleware::ReverseProxy';
     enable 'AxsLog',
         combined => 1,
         response_time => 1;
