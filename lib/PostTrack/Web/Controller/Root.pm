@@ -37,7 +37,7 @@ sub callback {
     my $access_token = $self->fb()->request_access_token($code);
     $self->post($access_token->token, $self->session->{track_url});
     $self->session->{access_token} = undef;
-    $self->redirect_to('/');
+    $self->redirect_to(PostTrack->config->{facebook}{site_url});
 }
 
 sub fb {
