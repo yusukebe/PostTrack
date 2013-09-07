@@ -48,6 +48,7 @@ sub callback {
     return $self->redirect_to('/') unless $access_token;
     $self->post($access_token->token, $self->session->{track_url});
     $self->session->{access_token} = undef;
+    warn $self->url_for('/')->to_abs->to_string();
     return $self->redirect_to($self->url_for('/')->to_abs->to_string());
 }
 
@@ -69,10 +70,8 @@ sub post {
         method => 'POST',
         song => $track_url
     );
-    warn $uri;
     my $ua = LWP::UserAgent->new;
     my $res = $ua->post($uri);
-    warn $res->content;
 }
 
 1;
