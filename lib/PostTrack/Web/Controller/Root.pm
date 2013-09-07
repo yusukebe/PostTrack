@@ -45,11 +45,13 @@ sub callback {
     try {
         $access_token = $self->fb()->request_access_token($code);
     };
-    my $path = $self->url_for('/')->to_abs->to_string();
-    return $self->redirect_to($path) unless $access_token;
-    $self->post($access_token->token, $self->session->{track_url});
-    $self->session->{access_token} = undef;
-    return $self->redirect_to($path);
+    if($access_token) {
+        $self->post($access_token->token, $self->session->{track_url});
+        $self->session->{access_token} = undef;
+    }
+    my $location = $self->url_for('/')->to_abs->to_string();
+    $self->res->code(302);
+    $self->res->headers->location($location);
 }
 
 sub fb {
