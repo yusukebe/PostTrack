@@ -48,13 +48,11 @@ sub callback {
     return $self->redirect_to('/') unless $access_token;
     $self->post($access_token->token, $self->session->{track_url});
     $self->session->{access_token} = undef;
-    warn $self->req->url->base();
-    return $self->redirect_to($self->req->url->base); #XXX
+    return $self->redirect_to($self->url_for('/')->to_abs->to_string());
 }
 
 sub fb {
     my $config = PostTrack->config()->{facebook};
-    warn $config->{site_url} . 'callback';
     my $fb = Facebook::Graph->new(
         app_id => $config->{app_id},
         secret => $config->{app_secret},
