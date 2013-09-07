@@ -7,5 +7,8 @@
     <hr />
     <br />
     <%= content %>
+    <br />
+    <hr />
+    <address>This is made by <a href="http://twitter.com/yusukebe">@yusukebe</a>, using Last.fm API and Facebook API.</address>
   </body>
 </html>
