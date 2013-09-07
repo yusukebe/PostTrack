@@ -48,7 +48,8 @@ sub callback {
     return $self->redirect_to('/') unless $access_token;
     $self->post($access_token->token, $self->session->{track_url});
     $self->session->{access_token} = undef;
-    return $self->redirect_to('/'); #XXX
+    warn $self->req->url->base();
+    return $self->redirect_to($self->req->url->base); #XXX
 }
 
 sub fb {
