@@ -3,6 +3,8 @@ use Mojo::Base 'Mojolicious::Controller';
 use PostTrack::Logic::LastFM;
 use Facebook::Graph;
 use LWP::UserAgent;
+use Encode;
+use Try::Tiny;
 
 sub index {
     my $self = shift;
@@ -15,7 +17,7 @@ sub search {
     my $a = $self->req->param('artist') || '';
     return $self->redirect_to('/') unless $t;
     my $lastfm = PostTrack::Logic::LastFM->new;
-    my $tracks = $lastfm->search_track({ track => $t, artist => $a });
+    my $tracks = $lastfm->search_track({ track => decode_utf8($t), artist => $a });
     $self->stash->{tracks} = $tracks;
 }
 
@@ -39,14 +41,19 @@ sub redirect {
 sub callback {
     my $self = shift;
     my $code = $self->req->param('code');
-    my $access_token = $self->fb()->request_access_token($code);
+    my $access_token;
+    try {
+        $access_token = $self->fb()->request_access_token($code);
+    };
+    return $self->redirect_to('/') unless $access_token;
     $self->post($access_token->token, $self->session->{track_url});
     $self->session->{access_token} = undef;
-    $self->redirect_to( $self->req->url->base ); #XXX
+    return $self->redirect_to('/'); #XXX
 }
 
 sub fb {
     my $config = PostTrack->config()->{facebook};
+    warn $config->{site_url} . 'callback';
     my $fb = Facebook::Graph->new(
         app_id => $config->{app_id},
         secret => $config->{app_secret},
